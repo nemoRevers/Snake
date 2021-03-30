@@ -19,8 +19,8 @@ class Snake:
         self.body.append(segm)
 
     def move(self, route):
-        x = self.body[0].position()[0]
-        y = self.body[0].position()[1]
+        x = int(self.body[0].position()[0])
+        y = int(self.body[0].position()[1])
         self.segment = self.body[-1]
         del self.body[-1]
         self.penultimateSegment = self.body[-1]
@@ -32,12 +32,16 @@ class Snake:
         update()
 
     # turn end block and move forward
+    route = 0
+
     def __route__(self, route):
         if route == "left":
-            self.penultimateSegment.left(90)
-            self.segment.left(90)
+            self.route += 90
+            self.penultimateSegment.seth(self.route)
+            self.segment.seth(self.route)
             self.segment.forward(20)
         elif route == "right":
-            self.penultimateSegment.right(90)
-            self.segment.right(90)
+            self.route -= 90
+            self.penultimateSegment.seth(self.route)
+            self.segment.seth(self.route)
             self.segment.forward(20)
